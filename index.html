@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kiosk Screensaver</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>C&R Tile Showroom</title>
     <style>
         * {
             margin: 0;
@@ -12,8 +12,6 @@
         }
 
         html, body {
-            margin: 0;
-            padding: 0;
             width: 100%;
             height: 100%;
             overflow: hidden;
@@ -24,20 +22,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             cursor: pointer;
             position: relative;
-        }
-        
-        /* Force portrait orientation - rotate if needed */
-        @media (orientation: landscape) {
-            body {
-                transform: rotate(90deg);
-                transform-origin: left top;
-                width: 100vh;
-                height: 100vw;
-                overflow-x: hidden;
-                position: absolute;
-                top: 100%;
-                left: 0;
-            }
         }
 
         /* Animated background tiles */
@@ -58,56 +42,57 @@
             animation: float 20s infinite ease-in-out;
         }
 
+        /* Portrait-optimized tile positions */
         .tile:nth-child(1) {
-            width: 150px;
-            height: 150px;
-            top: 10%;
-            left: 15%;
+            width: 120px;
+            height: 120px;
+            top: 8%;
+            left: 10%;
             animation-delay: 0s;
             opacity: 0.3;
         }
 
         .tile:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            top: 60%;
-            left: 70%;
+            width: 150px;
+            height: 150px;
+            top: 25%;
+            right: 15%;
             animation-delay: 3s;
             opacity: 0.25;
         }
 
         .tile:nth-child(3) {
-            width: 120px;
-            height: 120px;
-            top: 35%;
-            left: 80%;
+            width: 100px;
+            height: 100px;
+            top: 45%;
+            left: 20%;
             animation-delay: 6s;
             opacity: 0.35;
         }
 
         .tile:nth-child(4) {
-            width: 180px;
-            height: 180px;
-            top: 75%;
-            left: 20%;
+            width: 130px;
+            height: 130px;
+            top: 65%;
+            right: 10%;
             animation-delay: 9s;
             opacity: 0.2;
         }
 
         .tile:nth-child(5) {
-            width: 100px;
-            height: 100px;
-            top: 20%;
-            left: 50%;
+            width: 90px;
+            height: 90px;
+            top: 80%;
+            left: 15%;
             animation-delay: 12s;
             opacity: 0.4;
         }
 
         .tile:nth-child(6) {
-            width: 140px;
-            height: 140px;
-            top: 50%;
-            left: 10%;
+            width: 110px;
+            height: 110px;
+            top: 55%;
+            right: 25%;
             animation-delay: 15s;
             opacity: 0.3;
         }
@@ -117,13 +102,13 @@
                 transform: translate(0, 0) rotate(0deg);
             }
             25% {
-                transform: translate(30px, -30px) rotate(5deg);
+                transform: translate(20px, -20px) rotate(5deg);
             }
             50% {
-                transform: translate(-20px, 20px) rotate(-3deg);
+                transform: translate(-15px, 15px) rotate(-3deg);
             }
             75% {
-                transform: translate(20px, 30px) rotate(4deg);
+                transform: translate(15px, 20px) rotate(4deg);
             }
         }
 
@@ -135,15 +120,15 @@
             transform: translate(-50%, -50%);
             text-align: center;
             z-index: 10;
-            padding: 80px 60px;
-            max-width: 90%;
+            padding: 60px 40px;
+            max-width: 85%;
         }
 
         /* Animated tile icon - optimized for portrait */
         .tile-icon {
-            width: 220px;
-            height: 220px;
-            margin: 0 auto 80px;
+            width: 240px;
+            height: 240px;
+            margin: 0 auto 100px;
             position: relative;
             animation: pulseGlow 3s ease-in-out infinite;
         }
@@ -151,37 +136,37 @@
         .icon-tile {
             position: absolute;
             background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
-            border-radius: 6px;
-            box-shadow: 0 10px 40px rgba(230, 126, 34, 0.3);
+            border-radius: 8px;
+            box-shadow: 0 15px 50px rgba(230, 126, 34, 0.35);
         }
 
         .icon-tile:nth-child(1) {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             top: 0;
             left: 0;
             animation: tileShift1 4s ease-in-out infinite;
         }
 
         .icon-tile:nth-child(2) {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             top: 0;
             right: 0;
             animation: tileShift2 4s ease-in-out infinite;
         }
 
         .icon-tile:nth-child(3) {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             bottom: 0;
             left: 0;
             animation: tileShift3 4s ease-in-out infinite;
         }
 
         .icon-tile:nth-child(4) {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             bottom: 0;
             right: 0;
             animation: tileShift4 4s ease-in-out infinite;
@@ -189,76 +174,77 @@
 
         @keyframes tileShift1 {
             0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(10px, 10px); }
+            50% { transform: translate(12px, 12px); }
         }
 
         @keyframes tileShift2 {
             0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-10px, 10px); }
+            50% { transform: translate(-12px, 12px); }
         }
 
         @keyframes tileShift3 {
             0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(10px, -10px); }
+            50% { transform: translate(12px, -12px); }
         }
 
         @keyframes tileShift4 {
             0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-10px, -10px); }
+            50% { transform: translate(-12px, -12px); }
         }
 
         @keyframes pulseGlow {
             0%, 100% {
-                filter: drop-shadow(0 0 20px rgba(230, 126, 34, 0.4));
+                filter: drop-shadow(0 0 25px rgba(230, 126, 34, 0.45));
             }
             50% {
-                filter: drop-shadow(0 0 40px rgba(230, 126, 34, 0.6));
+                filter: drop-shadow(0 0 45px rgba(230, 126, 34, 0.65));
             }
         }
 
-        /* Main heading - optimized for portrait */
+        /* Main heading - portrait optimized */
         h1 {
-            font-size: 96px;
+            font-size: 110px;
             font-weight: 300;
-            letter-spacing: 3px;
-            margin-bottom: 60px;
+            letter-spacing: 4px;
+            margin-bottom: 70px;
             background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: fadeInDown 1.5s ease-out;
-            line-height: 1.2;
+            line-height: 1.15;
         }
 
-        /* Subheading - optimized for portrait */
+        /* Subheading - portrait optimized */
         .subtitle {
-            font-size: 64px;
+            font-size: 68px;
             font-weight: 400;
             color: #7f8c8d;
-            margin-bottom: 120px;
+            margin-bottom: 140px;
             animation: fadeInUp 1.5s ease-out 0.3s both;
+            line-height: 1.3;
         }
 
-        /* Touch prompt - optimized for portrait */
+        /* Touch prompt - portrait optimized */
         .touch-prompt {
-            font-size: 48px;
+            font-size: 52px;
             color: #95a5a6;
             font-weight: 300;
             animation: pulse 2s ease-in-out infinite;
-            margin-top: 60px;
+            margin-top: 70px;
         }
 
         .hand-icon {
             display: inline-block;
-            font-size: 64px;
-            margin-right: 20px;
+            font-size: 70px;
+            margin-right: 25px;
             animation: tap 1.5s ease-in-out infinite;
         }
 
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-50px);
+                transform: translateY(-60px);
             }
             to {
                 opacity: 1;
@@ -269,7 +255,7 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(60px);
             }
             to {
                 opacity: 1;
