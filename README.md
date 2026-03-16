@@ -1,2 +1,0 @@
-# Screensaver
-Kiosk screensaver
